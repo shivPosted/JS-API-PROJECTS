@@ -13,6 +13,7 @@ body {
 }
 
 textarea:focus {
+  outline: none;
   border: dotted #666 3.5px;
   /* outline: none; */
 }
@@ -37,7 +38,9 @@ h2 {
   margin-top: 1.2rem;
 }
 #text--area {
-  outline: none;
+  outline-width: 3.5px;
+  outline-color: #f7f7f7;
+  /* border-width: 1px; */
   width: 100%;
   font-size: 1.2rem;
   border-radius: 9px;
@@ -58,7 +61,7 @@ h2 {
   transition: all 0.5s ease-in;
 }
 
-.btn:hover {
+.btn:active {
   border: 2px solid black;
   color: #6589e4;
   background-color: #f7f7f7;

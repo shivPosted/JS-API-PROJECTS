@@ -4,12 +4,13 @@ const textArea = document.querySelector('#text--area');
 
 textArea.value = '';
 
+let state = 0;
 const texttospeech = function (text) {
   const whatToSpeak = new SpeechSynthesisUtterance(text);
   whatToSpeak.onend = function (event) {
     console.log(event, 'speeech has ended');
     btn.textContent = 'Convert to speech';
-    btn.dataset.state = 0;
+    state = 0;
   };
   whatToSpeak.lang = `${navigator.language}`;
   return whatToSpeak;
@@ -18,30 +19,27 @@ const texttospeech = function (text) {
 const speak = function (txt) {
   const text = texttospeech(txt);
   window.speechSynthesis.speak(text);
-  console.log(text);
+  state = 1;
 };
 const pause = function () {
   window.speechSynthesis.pause();
+  state = 2;
 };
 const resume = function () {
   window.speechSynthesis.resume();
+  state = 1;
 };
 btn.addEventListener('click', function () {
   const text = textArea.value;
-  if (textArea.value === '') return;
-  console.log(this);
-  if (this.dataset.state == 0) {
-    this.textContent = 'pause';
+  if (!text) return;
+  if (state === 0 && text) {
     speak(text);
-    console.log(this.dataset.state);
-    this.dataset.state = 1;
-  } else if (this.dataset.state == 1) {
+    this.textContent = 'pause';
+  } else if (state === 1 && text) {
     this.textContent = 'resume';
     pause();
-    this.dataset.state = 2;
-  } else if (this.dataset.state == 2) {
+  } else {
     resume();
     this.textContent = 'pause';
-    this.dataset.state = 1;
   }
 });

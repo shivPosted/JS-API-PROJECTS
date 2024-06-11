@@ -31,7 +31,7 @@ h1 {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%);
+  transform: translateX(-50%);
   max-width: 30%;
   background-color: #f7f7f7;
   display: flex;
@@ -41,8 +41,13 @@ h1 {
   /* align-items: center; */
   border-top: 4px solid #ea4d67;
   border-radius: 5px 5px 0 0;
-
+  transition: all 0.5s;
   /* align-content: start; */
+}
+
+.connection-pop-up.connection-pop-up--hidden {
+  transform: translate(-50%, -100%);
+  opacity: 0;
 }
 
 .connection-pop-up.online {
